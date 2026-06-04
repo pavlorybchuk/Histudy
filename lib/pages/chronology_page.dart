@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import "package:histudy/utils.dart";
 
 sealed class _ChronologyItem {}
 
@@ -318,7 +319,7 @@ class _EventTile extends StatelessWidget {
               Divider(),
 
               Text(
-                description,
+                description.capitalized,
 
                 style: const TextStyle(
                   fontSize: 15.5,

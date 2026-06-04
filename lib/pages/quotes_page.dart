@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import "package:histudy/utils.dart";
 
 class _Quote {
   final String quote;
@@ -294,7 +295,7 @@ class _QuoteCard extends StatelessWidget {
 
                       Expanded(
                         child: Text(
-                          quote.description,
+                          quote.description.capitalized,
                           style: const TextStyle(
                             fontSize: 14.5,
                             height: 1.6,

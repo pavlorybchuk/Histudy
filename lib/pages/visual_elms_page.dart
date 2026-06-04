@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import "package:histudy/utils.dart";
 
 class _VisualItem {
   final String path;
@@ -243,12 +244,12 @@ class _CenturySeparator extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
 
               gradient: const LinearGradient(
-                colors: [Color(0xFF7B61FF), Color(0xFF5B46D6)],
+                colors: [Color(0xFFFFA502), Color.fromARGB(255, 255, 179, 39)],
               ),
 
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF7B61FF).withOpacity(0.28),
+                  color: const Color(0xFFFFA502).withOpacity(0.28),
                   blurRadius: 12,
                   offset: const Offset(0, 6),
                 ),
@@ -371,7 +372,7 @@ class _VisualCard extends StatelessWidget {
               padding: const EdgeInsets.all(18),
 
               child: Text(
-                item.description,
+                item.description.capitalized,
                 style: const TextStyle(
                   fontSize: 14.5,
                   height: 1.6,
@@ -588,7 +589,7 @@ class _AnchorButton extends StatelessWidget {
 
                 gradient: isActive
                     ? const LinearGradient(
-                        colors: [Color(0xFF7B61FF), Color(0xFF5B46D6)],
+                        colors: [Color(0xFFFFA502), Color.fromARGB(255, 255, 179, 39)],
                       )
                     : null,
 
@@ -597,7 +598,7 @@ class _AnchorButton extends StatelessWidget {
                 boxShadow: isActive
                     ? [
                         BoxShadow(
-                          color: const Color(0xFF7B61FF).withOpacity(0.3),
+                          color: const Color(0xFFFFA502).withOpacity(0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),

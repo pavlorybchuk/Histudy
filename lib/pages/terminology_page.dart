@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import "package:histudy/utils.dart";
 
 class _Term {
   final String term;
@@ -392,7 +393,7 @@ class _TermTileState extends State<_TermTile>
 
                               Expanded(
                                 child: Text(
-                                  widget.term.description,
+                                  widget.term.description.capitalized,
 
                                   style: const TextStyle(
                                     fontSize: 15,
