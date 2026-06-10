@@ -40,6 +40,7 @@ class _QuotesPageState extends State<QuotesPage> {
 
   Future<void> _loadData() async {
     final raw = await rootBundle.loadString('assets/history_data.json');
+    late SharedPreferences prefs;
 
     final json = jsonDecode(raw) as Map<String, dynamic>;
 
@@ -47,7 +48,7 @@ class _QuotesPageState extends State<QuotesPage> {
         .map((e) => _Quote.fromJson(e as Map<String, dynamic>))
         .toList();
 
-    final prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
     final saved = prefs.getInt(_kPrefsKey);
 
     final bookmarked = (saved != null && saved < list.length) ? saved : null;
@@ -62,8 +63,9 @@ class _QuotesPageState extends State<QuotesPage> {
         if (_scrollController.isAttached) {
           _scrollController.scrollTo(
             index: bookmarked,
-            duration: const Duration(milliseconds: 1),
+            duration: const Duration(milliseconds: 300),
             alignment: 0.08,
+            curve: Curves.easeInOutCubic
           );
         }
       });
@@ -117,30 +119,30 @@ class _QuotesPageState extends State<QuotesPage> {
       body: _quotes == null
           ? const Center(child: CircularProgressIndicator())
           : _quotes!.isEmpty
-              ? const Center(
-                  child: Text(
-                    "Цитати відсутні",
-                    style: TextStyle(fontSize: 16, color: Colors.black54),
+          ? const Center(
+              child: Text(
+                "Цитати відсутні",
+                style: TextStyle(fontSize: 16, color: Colors.black54),
+              ),
+            )
+          : ScrollablePositionedList.builder(
+              itemScrollController: _scrollController,
+              itemPositionsListener: _positionsListener,
+              padding: const EdgeInsets.fromLTRB(18, 12, 18, 28),
+              itemCount: _quotes!.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: index < _quotes!.length - 1 ? 18 : 0,
                   ),
-                )
-              : ScrollablePositionedList.builder(
-                  itemScrollController: _scrollController,
-                  itemPositionsListener: _positionsListener,
-                  padding: const EdgeInsets.fromLTRB(18, 12, 18, 28),
-                  itemCount: _quotes!.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        bottom: index < _quotes!.length - 1 ? 18 : 0,
-                      ),
-                      child: _QuoteCard(
-                        quote: _quotes![index],
-                        isBookmarked: _bookmarkedIndex == index,
-                        onTap: () => _toggleBookmark(index),
-                      ),
-                    );
-                  },
-                ),
+                  child: _QuoteCard(
+                    quote: _quotes![index],
+                    isBookmarked: _bookmarkedIndex == index,
+                    onTap: () => _toggleBookmark(index),
+                  ),
+                );
+              },
+            ),
     );
   }
 }
@@ -159,7 +161,9 @@ class _QuoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      splashColor: Colors.transparent,
+      borderRadius: BorderRadius.circular(30),
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
@@ -176,8 +180,8 @@ class _QuoteCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: isBookmarked
-                  ? const Color(0xFFFF6B6B).withOpacity(0.18)
-                  : Colors.black.withOpacity(0.05),
+                  ? const Color(0xFFFF6B6B).withValues(alpha: 0.18)
+                  : Colors.black.withValues(alpha: 0.05),
               blurRadius: isBookmarked ? 24 : 16,
               offset: const Offset(0, 8),
             ),
@@ -185,7 +189,7 @@ class _QuoteCard extends StatelessWidget {
 
           border: isBookmarked
               ? Border.all(
-                  color: const Color(0xFFFF6B6B).withOpacity(0.4),
+                  color: const Color(0xFFFF6B6B).withValues(alpha: 0.4),
                   width: 1.5,
                 )
               : null,
@@ -214,7 +218,9 @@ class _QuoteCard extends StatelessWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFFFF6B6B).withOpacity(0.3),
+                            color: const Color(
+                              0xFFFF6B6B,
+                            ).withValues(alpha: 0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 3),
                           ),

@@ -166,7 +166,6 @@ class _ChronologyPageState extends State<ChronologyPage> {
                   right: 10,
                   top: 0,
                   bottom: 0,
-                  width: _kPanelWidth,
                   child: Center(
                     child: _AnchorPanel(
                       centuries: _centuries!,
@@ -202,7 +201,6 @@ class _ChronologyPageState extends State<ChronologyPage> {
   }
 }
 
-const double _kPanelWidth = 58;
 
 class _CenturySeparator extends StatelessWidget {
   final String century;
@@ -233,7 +231,7 @@ class _CenturySeparator extends StatelessWidget {
 
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF7B61FF).withOpacity(0.25),
+                  color: const Color(0xFF7B61FF).withValues(alpha: 0.25),
                   blurRadius: 12,
                   offset: const Offset(0, 6),
                 ),
@@ -281,7 +279,7 @@ class _EventTile extends StatelessWidget {
 
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 14,
               offset: const Offset(0, 6),
             ),
@@ -316,7 +314,7 @@ class _EventTile extends StatelessWidget {
                 ),
               ),
 
-              Divider(),
+              Divider(height: 1, thickness: 0.5),
 
               Align(
                 alignment: .centerLeft,
@@ -365,7 +363,7 @@ class _AnchorPanel extends StatelessWidget {
 
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 14,
             offset: const Offset(-2, 0),
           ),
@@ -419,7 +417,8 @@ class _AnchorButton extends StatelessWidget {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 220),
 
-              width: 42,
+              width: .infinity,
+              constraints: BoxConstraints(maxWidth: 42),
               height: 42,
 
               decoration: BoxDecoration(
@@ -436,7 +435,7 @@ class _AnchorButton extends StatelessWidget {
                 boxShadow: isActive
                     ? [
                         BoxShadow(
-                          color: const Color(0xFF7B61FF).withOpacity(0.3),
+                          color: const Color(0xFF7B61FF).withValues(alpha: 0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),

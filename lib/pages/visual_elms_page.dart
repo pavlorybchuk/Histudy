@@ -181,7 +181,6 @@ class _VisualElmsPageState extends State<VisualElmsPage> {
                   right: 10,
                   top: 0,
                   bottom: 0,
-                  width: _kPanelWidth,
                   child: Center(
                     child: _AnchorPanel(
                       centuries: _centuries!,
@@ -202,7 +201,7 @@ class _VisualElmsPageState extends State<VisualElmsPage> {
       itemScrollController: _scrollController,
       itemPositionsListener: _positionsListener,
 
-      padding: const EdgeInsets.fromLTRB(16, 8, 8, 30),
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 30),
 
       itemBuilder: (context, index) {
         final item = _items![index];
@@ -216,8 +215,6 @@ class _VisualElmsPageState extends State<VisualElmsPage> {
     );
   }
 }
-
-const double _kPanelWidth = 58;
 
 class _CenturySeparator extends StatelessWidget {
   final String century;
@@ -249,7 +246,7 @@ class _CenturySeparator extends StatelessWidget {
 
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFFFA502).withOpacity(0.28),
+                  color: const Color(0xFFFFA502).withValues(alpha: 0.28),
                   blurRadius: 12,
                   offset: const Offset(0, 6),
                 ),
@@ -298,7 +295,7 @@ class _VisualCard extends StatelessWidget {
 
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 16,
               offset: const Offset(0, 8),
             ),
@@ -351,7 +348,7 @@ class _VisualCard extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
 
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.35),
+                            color: Colors.black.withValues(alpha: 0.35),
                             shape: BoxShape.circle,
                           ),
 
@@ -392,7 +389,7 @@ class _VisualCard extends StatelessWidget {
       PageRouteBuilder(
         opaque: false,
 
-        transitionDuration: const Duration(milliseconds: 300),
+        transitionDuration: Duration(milliseconds: 250),
 
         pageBuilder: (_, animation, __) {
           return FadeTransition(
@@ -414,14 +411,36 @@ class _FullscreenImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        systemOverlayStyle: .light,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        automaticallyImplyActions: false,
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 0, 0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.4),
+              shape: BoxShape.circle,
+            ),
+          
+            child: IconButton(
+              onPressed: () => Navigator.pop(context),
+          
+              icon: const Icon(Icons.close_rounded, color: Colors.white),
+            ),
+          ),
+        ),
+      ),
 
       body: Stack(
         children: [
-          Center(
-            child: InteractiveViewer(
-              minScale: 0.8,
-              maxScale: 5,
-
+          InteractiveViewer(
+            minScale: 1,
+            maxScale: 5,
+            clipBehavior: Clip.none,
+            panEnabled: true,
+            child: Center(
               child: Hero(
                 tag: item.path,
 
@@ -442,26 +461,6 @@ class _FullscreenImagePage extends StatelessWidget {
           ),
 
           Positioned(
-            top: 50,
-            left: 16,
-
-            child: SafeArea(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.4),
-                  shape: BoxShape.circle,
-                ),
-
-                child: IconButton(
-                  onPressed: () => Navigator.pop(context),
-
-                  icon: const Icon(Icons.close_rounded, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-
-          Positioned(
             left: 0,
             right: 0,
             bottom: 0,
@@ -474,7 +473,10 @@ class _FullscreenImagePage extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
 
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.95)],
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.95),
+                  ],
                 ),
               ),
 
@@ -522,7 +524,7 @@ class _AnchorPanel extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 14,
             offset: const Offset(-2, 0),
           ),
@@ -589,7 +591,10 @@ class _AnchorButton extends StatelessWidget {
 
                 gradient: isActive
                     ? const LinearGradient(
-                        colors: [Color(0xFFFFA502), Color.fromARGB(255, 255, 179, 39)],
+                        colors: [
+                          Color(0xFFFFA502),
+                          Color.fromARGB(255, 255, 179, 39),
+                        ],
                       )
                     : null,
 
@@ -598,7 +603,7 @@ class _AnchorButton extends StatelessWidget {
                 boxShadow: isActive
                     ? [
                         BoxShadow(
-                          color: const Color(0xFFFFA502).withOpacity(0.3),
+                          color: const Color(0xFFFFA502).withValues(alpha: 0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),

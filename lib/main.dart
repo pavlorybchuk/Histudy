@@ -14,6 +14,8 @@ class Histudy extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Histudy',
       theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: "NotoSans",
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
           brightness: Brightness.light,

@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'chronology_page.dart';
 import 'quotes_page.dart';
 import 'terminology_page.dart';
 import 'visual_elms_page.dart';
+import 'dart:io';
 
 final List<List<dynamic>> pages = [
   [
@@ -119,7 +120,7 @@ class PageCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.25),
+            color: accentColor.withValues(alpha: 0.25),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -134,11 +135,13 @@ class PageCard extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                PageRouteBuilder(
-                  transitionDuration: const Duration(milliseconds: 300),
-                  pageBuilder: (_, animation, __) =>
-                      FadeTransition(opacity: animation, child: page),
-                ),
+                !Platform.isIOS
+                    ? PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 300),
+                        pageBuilder: (_, animation, __) =>
+                            FadeTransition(opacity: animation, child: page),
+                      )
+                    : CupertinoPageRoute(builder: (context) => page),
               );
             },
             child: SizedBox(
@@ -157,8 +160,8 @@ class PageCard extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          accentColor.withOpacity(0.85),
-                          Colors.black.withOpacity(0.55),
+                          accentColor.withValues(alpha: 0.85),
+                          Colors.black.withValues(alpha: 0.55),
                         ],
                       ),
                     ),
@@ -174,7 +177,7 @@ class PageCard extends StatelessWidget {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: const Text(
@@ -197,12 +200,14 @@ class PageCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   height: 1.1,
                                 ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.15),
+                                color: Colors.white.withValues(alpha: 0.15),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(

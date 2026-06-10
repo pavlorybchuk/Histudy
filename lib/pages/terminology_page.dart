@@ -126,7 +126,7 @@ class _TerminologyPageState extends State<TerminologyPage> {
 
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 12,
                     offset: const Offset(0, 6),
                   ),
@@ -259,6 +259,7 @@ class _TermTileState extends State<_TermTile>
   }
 
   void _toggle() {
+    if (_ctrl.isAnimating) return;
     setState(() => _expanded = !_expanded);
 
     _expanded ? _ctrl.forward() : _ctrl.reverse();
@@ -284,7 +285,7 @@ class _TermTileState extends State<_TermTile>
 
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 16,
             offset: const Offset(0, 8),
           ),
