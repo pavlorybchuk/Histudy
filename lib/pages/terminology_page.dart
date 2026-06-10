@@ -99,7 +99,7 @@ class _TerminologyPageState extends State<TerminologyPage> {
           "Термінологія",
           style: TextStyle(
             color: Color(0xFF1E293B),
-            fontSize: 28,
+            fontSize: 23,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -367,43 +367,44 @@ class _TermTileState extends State<_TermTile>
                             ),
                           ),
 
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 5,
-                                height: 70,
-
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-
-                                  gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-
-                                    colors: [
-                                      Color(0xFF00B894),
-                                      Color(0xFF00CEC9),
-                                    ],
+                          child: IntrinsicHeight(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 5,
+                            
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                            
+                                    gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                            
+                                      colors: [
+                                        Color(0xFF00B894),
+                                        Color(0xFF00CEC9),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-
-                              const SizedBox(width: 14),
-
-                              Expanded(
-                                child: Text(
-                                  widget.term.description.capitalized,
-
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    height: 1.7,
-                                    color: Color(0xFF475569),
-                                    fontWeight: FontWeight.w500,
+                            
+                                const SizedBox(width: 14),
+                            
+                                Expanded(
+                                  child: Text(
+                                    widget.term.description.capitalized,
+                            
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      height: 1.7,
+                                      color: Color(0xFF475569),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ],

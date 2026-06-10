@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 4),
                   ],
                 ),
               ),

@@ -151,7 +151,7 @@ class _ChronologyPageState extends State<ChronologyPage> {
           style: TextStyle(
             color: Color(0xFF1E293B),
             fontWeight: FontWeight.bold,
-            fontSize: 28,
+            fontSize: 23,
           ),
         ),
       ),
@@ -185,7 +185,7 @@ class _ChronologyPageState extends State<ChronologyPage> {
       itemCount: _items!.length,
       itemScrollController: _scrollController,
       itemPositionsListener: _positionsListener,
-      padding: const EdgeInsets.fromLTRB(16, 8, 8, 24),
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 24),
       itemBuilder: (context, index) {
         final item = _items![index];
 
@@ -222,7 +222,7 @@ class _CenturySeparator extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 14),
 
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
@@ -245,7 +245,7 @@ class _CenturySeparator extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 10,
                 letterSpacing: 0.5,
               ),
             ),
@@ -318,14 +318,17 @@ class _EventTile extends StatelessWidget {
 
               Divider(),
 
-              Text(
-                description.capitalized,
-
-                style: const TextStyle(
-                  fontSize: 15.5,
-                  height: 1.5,
-                  color: Color(0xFF334155),
-                  fontWeight: FontWeight.w500,
+              Align(
+                alignment: .centerLeft,
+                child: Text(
+                  description.capitalized,
+                
+                  style: const TextStyle(
+                    fontSize: 15.5,
+                    height: 1.5,
+                    color: Color(0xFF334155),
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ],
@@ -354,7 +357,7 @@ class _AnchorPanel extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: 350),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: BoxBorder.all(
+        border: Border.all(
           color: const Color.fromARGB(255, 200, 200, 200),
           strokeAlign: 1
         ),

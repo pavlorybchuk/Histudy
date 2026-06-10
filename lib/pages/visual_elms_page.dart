@@ -156,7 +156,7 @@ class _VisualElmsPageState extends State<VisualElmsPage> {
           "Візуальні елементи",
           style: TextStyle(
             color: Color(0xFF1E293B),
-            fontSize: 26,
+            fontSize: 23,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -238,7 +238,7 @@ class _CenturySeparator extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 14),
 
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
@@ -266,7 +266,7 @@ class _CenturySeparator extends StatelessWidget {
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.5,
-                fontSize: 14,
+                fontSize: 10,
               ),
             ),
           ),
@@ -515,7 +515,7 @@ class _AnchorPanel extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: 350),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: BoxBorder.all(
+        border: Border.all(
           color: const Color.fromARGB(255, 200, 200, 200),
           strokeAlign: 1,
         ),

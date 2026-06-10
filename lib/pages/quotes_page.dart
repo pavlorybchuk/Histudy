@@ -27,9 +27,6 @@ class QuotesPage extends StatefulWidget {
 class _QuotesPageState extends State<QuotesPage> {
   List<_Quote>? _quotes;
   int? _bookmarkedIndex;
-
-  // Use ItemScrollController instead of ScrollController —
-  // it can scroll to any index even if the item isn't built yet.
   final _scrollController = ItemScrollController();
   final _positionsListener = ItemPositionsListener.create();
 
@@ -53,7 +50,6 @@ class _QuotesPageState extends State<QuotesPage> {
     final prefs = await SharedPreferences.getInstance();
     final saved = prefs.getInt(_kPrefsKey);
 
-    // Validate that the saved index is still in range.
     final bookmarked = (saved != null && saved < list.length) ? saved : null;
 
     setState(() {
@@ -61,14 +57,13 @@ class _QuotesPageState extends State<QuotesPage> {
       _bookmarkedIndex = bookmarked;
     });
 
-    // Scroll after the list is first laid out.
     if (bookmarked != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_scrollController.isAttached) {
           _scrollController.scrollTo(
             index: bookmarked,
             duration: const Duration(milliseconds: 1),
-            alignment: 0.08, // small top padding so the card isn't flush
+            alignment: 0.08,
           );
         }
       });
@@ -105,7 +100,7 @@ class _QuotesPageState extends State<QuotesPage> {
           "Цитати",
           style: TextStyle(
             color: Color(0xFF1E293B),
-            fontSize: 28,
+            fontSize: 23,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -135,7 +130,6 @@ class _QuotesPageState extends State<QuotesPage> {
                   itemCount: _quotes!.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      // Replaces the separatorBuilder from the old ListView.
                       padding: EdgeInsets.only(
                         bottom: index < _quotes!.length - 1 ? 18 : 0,
                       ),
@@ -236,7 +230,7 @@ class _QuoteCard extends StatelessWidget {
                           ),
                           SizedBox(width: 4),
                           Text(
-                            "Збережено",
+                            "Закладка",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -248,13 +242,13 @@ class _QuoteCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 10),
               ],
 
               Text(
                 quote.quote,
                 style: const TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   height: 1.7,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.w600,

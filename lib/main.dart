@@ -14,9 +14,9 @@ class Histudy extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Histudy',
       theme: ThemeData(
-        colorScheme: .fromSeed(
+        colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
-          brightness: .light,
+          brightness: Brightness.light,
         ),
         appBarTheme: const AppBarTheme(
           backgroundColor:
