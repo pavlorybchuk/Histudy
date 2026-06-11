@@ -296,6 +296,7 @@ class _TermTileState extends State<_TermTile>
         color: Colors.transparent,
 
         child: InkWell(
+          splashColor: Colors.transparent,
           borderRadius: BorderRadius.circular(28),
           onTap: _toggle,
 

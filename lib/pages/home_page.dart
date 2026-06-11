@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart'; // kIsWeb, defaultTargetPlatform
 import 'package:flutter/material.dart';
 import 'chronology_page.dart';
 import 'quotes_page.dart';
 import 'terminology_page.dart';
 import 'visual_elms_page.dart';
-import 'dart:io';
+// dart:io is NOT imported — it crashes on web.
 
 final List<List<dynamic>> pages = [
   [
@@ -32,6 +33,10 @@ final List<List<dynamic>> pages = [
     const Color(0xFFFFA502),
   ],
 ];
+
+/// Returns true when running natively on iOS (never true on web).
+bool get _isNativeIOS =>
+    !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -135,13 +140,13 @@ class PageCard extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                !Platform.isIOS
-                    ? PageRouteBuilder(
+                _isNativeIOS
+                    ? CupertinoPageRoute(builder: (_) => page)
+                    : PageRouteBuilder(
                         transitionDuration: const Duration(milliseconds: 300),
                         pageBuilder: (_, animation, __) =>
                             FadeTransition(opacity: animation, child: page),
-                      )
-                    : CupertinoPageRoute(builder: (context) => page),
+                      ),
               );
             },
             child: SizedBox(
